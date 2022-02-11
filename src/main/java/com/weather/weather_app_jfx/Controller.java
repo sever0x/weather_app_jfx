@@ -9,28 +9,28 @@ import org.json.JSONObject;
 public class Controller extends Helper {
 
     @FXML
-    public TextField city;
+    private TextField city;
 
     @FXML
-    public Button getInfo;
+    private Button getInfo;
 
     @FXML
-    public Text humidity;
+    private Text humidity;
 
     @FXML
-    public Text pressure;
+    private Text pressure;
 
     @FXML
-    public Text temp;
+    private Text temp;
 
     @FXML
-    public Text temp_feel;
+    private Text temp_feel;
 
     @FXML
-    public Text temp_max;
+    private Text temp_max;
 
     @FXML
-    public Text temp_min;
+    private Text temp_min;
 
     @FXML
     void initialize() {
