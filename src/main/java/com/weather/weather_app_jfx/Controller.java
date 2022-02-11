@@ -3,54 +3,34 @@ package com.weather.weather_app_jfx;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
-import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.ResourceBundle;
-
-public class Controller implements Helper {
+public class Controller extends Helper {
 
     @FXML
-    private ResourceBundle resources;
+    public TextField city;
 
     @FXML
-    private URL location;
+    public Button getInfo;
 
     @FXML
-    private TextField city;
+    public Text humidity;
 
     @FXML
-    private Button getInfo;
+    public Text pressure;
 
     @FXML
-    private Text humidity;
+    public Text temp;
 
     @FXML
-    private ImageView icon;
+    public Text temp_feel;
 
     @FXML
-    private Text nameText;
+    public Text temp_max;
 
     @FXML
-    private Text pressure;
-
-    @FXML
-    private Text temp;
-
-    @FXML
-    private Text temp_feel;
-
-    @FXML
-    private Text temp_max;
-
-    @FXML
-    private Text temp_min;
+    public Text temp_min;
 
     @FXML
     void initialize() {
@@ -59,7 +39,7 @@ public class Controller implements Helper {
     }
 
     private void setWeather() {
-        if (!city.equals("")) {
+        if (!city.getText().equals("")) {
             String output = getWeatherInfo(
                     "https://api.openweathermap.org/data/2.5/weather?q="
                             + city.getText().trim()
@@ -75,26 +55,5 @@ public class Controller implements Helper {
                 humidity.setText("Humidity: " + jsonObject.getJSONObject("main").getDouble("humidity") + "%");
             }
         }
-    }
-
-    private String getWeatherInfo(String address) {
-        StringBuilder content = new StringBuilder();
-
-        try {
-            URL url = new URL(address);
-            URLConnection connection = url.openConnection();
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String text;
-
-            while ((text = bufferedReader.readLine()) != null) {
-                content.append(text + "\n");
-            }
-            bufferedReader.close();
-        } catch (Exception ex) {
-            //System.out.println("Check city input");
-            city.setTooltip(new Tooltip("Check city input"));
-        }
-
-        return content.toString();
     }
 }
